@@ -1,0 +1,8 @@
+# Dependencias del entorno de la aplicación web y modelado
+# Persona 3: Registrar aquí las versiones exactas instaladas en el entorno local
+streamlit
+scikit-learn
+pandas
+numpy
+joblib
+matplotlib
