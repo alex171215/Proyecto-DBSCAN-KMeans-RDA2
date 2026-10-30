@@ -20,3 +20,6 @@ env/
 # OS
 .DS_Store
 Thumbs.db
+
+# Archivos de referencia de otros proyectos
+PhishGuard_Notebook_Maestro.ipynb

@@ -395,13 +395,20 @@ def asignar_cluster_dbscan(X_new_raw, paquete):
 
 ### 7. Reglas para agentes de IA
 Todo agente artificial asignado a la ejecución de uno de estos paquetes se someterá estrictamente a las siguientes normativas:
-1. **Inmutabilidad Fundacional:** No modificar `00_foundation.py` ni `DOCUMENTO_MAESTRO.md`.
+1. **Inmutabilidad Fundacional:** No modificar `00_foundation.py` salvo instrucción expresa del usuario.
 2. **Prohibición de Etiquetas:** Bajo ninguna circunstancia introducir las variables `Burnout_Level` ni `Dropout_Risk` en el preprocesamiento, escalado o entrenamiento espacial.
 3. **Reproducibilidad:** Respetar la semilla paramétrica `RANDOM_STATE = 42`.
 4. **Validación Autónoma:** Los notebooks (`.ipynb`) deben diseñarse para ser ejecutados de la primera a la última celda sin requerir intervención de consola.
 5. **Decisiones Técnicas:** Documentar en texto plano (Markdown) cualquier decisión técnica no cubierta explícitamente, pero sin violar las normas actuales.
 6. **Veracidad:** No inventar ni alucinar valores de métricas (Silhouette, inercia) sin haber ejecutado computacionalmente el cálculo.
 7. **Consistencia de Artefactos:** Verificar que la exportación hacia los directorios `/models`, `/figs`, `/tables` y `/segments` coincida gramaticalmente con las rutas estipuladas.
+8. **Estándar de Narrativa Pedagógica y Argumentario de Defensa (Estilo PhishGuard - Obligatorio):**
+   Los notebooks (`01_kmeans.ipynb`, `02_dbscan.ipynb`, `03_final.ipynb`) no son simples cuadernos de código; son el material de estudio y el guion con el que los estudiantes defenderán individualmente el proyecto en la sustentación oral (5-10 min). Todo agente de IA que genere o edite código debe aplicar un estándar de narrativa pedagógica celda por celda:
+   - **Antes de cada celda de código relevante (Propósito y Fundamento):** Una celda de Markdown explicando qué se va a hacer, cuál es el fundamento matemático o algorítmico (e.g. distancia euclidiana, cálculo de inercia intra-cluster, radio de vecindad $\varepsilon$ y densidad $\text{MinPts}$, varianza explicada en PCA) y por qué ese paso es necesario.
+   - **Después de cada celda de código con salida numérica o gráfica (Interpretación y Argumentario de Defensa):** Una celda de Markdown con el bloque **`Interpretación y Argumento para Defensa:`** que responda claramente:
+     1. *¿Qué significa este resultado en el dominio del negocio/estudiantes?* (e.g., qué revela la correlación, qué indica el codo o el salto en $k$-dist, cuáles son las características predominantes del cluster).
+     2. *¿Qué decisión técnica se toma a partir de aquí?* (e.g., por qué se elige $K=3$ o $K=4$, por qué se descarta un $\varepsilon$ con >20% de ruido).
+     3. *¿Cómo defenderlo ante el docente? (Pregunta típica de examen):* Una explicación breve y directa pensada para que el estudiante la lea y sepa contestar con seguridad si el profesor pregunta "¿Por qué usó StandardScaler y no MinMaxScaler?", "¿Por qué DBSCAN marcó esos puntos como ruido?", "¿Qué representan PC1 y PC2 en los loadings?".
 
 ### 8. Cómo se garantiza la independencia
 La estructura de este documento elimina los cuellos de botella mediante tres directrices:
@@ -422,6 +429,7 @@ La estructura de este documento elimina los cuellos de botella mediante tres dir
 
 **Para Notebooks (K-Means y DBSCAN):**
 - [ ] Checklist obligatoria de EDA cumplida (3 visualizaciones, varianza PCA, loadings, correlaciones, outliers).
+- [ ] **Estándar pedagógico PhishGuard cumplido:** celdas de Markdown antes y después de cada bloque clave con propósito teórico, interpretación de métricas/gráficos y argumentos de defensa oral.
 - [ ] Ejecución de `Restart & Run All` exitosa.
 - [ ] Pipeline exportado utilizando `joblib` junto a sus etiquetas.
 - [ ] Nombres descriptivos de segmentos generados usando `groupby().mean()`.
@@ -431,6 +439,7 @@ La estructura de este documento elimina los cuellos de botella mediante tres dir
 **Para Notebook consolidado (`03_final.ipynb`):**
 - [ ] Ejecuta de punta a punta sin errores en una sesión limpia.
 - [ ] Contiene: contexto, EDA, preparación, PCA, K-Means, DBSCAN, comparación, decisión del modelo final, interpretación de segmentos y exportación.
+- [ ] Narrativa fluida y pedagógica que sirve como resumen ejecutivo y guía integral de estudio para la defensa grupal.
 - [ ] Incluye la tabla comparativa y la justificación del modelo elegido.
 
 **Para Aplicación Web y Entorno:**
