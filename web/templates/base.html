@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Orienta{% endblock %} · Orienta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header class="nav">
+    <div class="contenedor nav-in">
+      <a class="logo" href="{{ url_for('inicio') }}"><span class="logo-marca">O</span>Orienta</a>
+      <nav class="nav-links">
+        <a href="{{ url_for('inicio') }}#como">Cómo funciona</a>
+        <a href="{{ url_for('inicio') }}#perfiles">Perfiles</a>
+        <a href="{{ url_for('tecnico') }}">Detalle técnico</a>
+      </nav>
+      <a class="btn btn-primario btn-chico" href="{{ url_for('evaluar') }}">Evaluar estudiante</a>
+    </div>
+  </header>
+
+  <main>{% block contenido %}{% endblock %}</main>
+
+  <footer class="pie">
+    <div class="contenedor pie-in">
+      <div>
+        <a class="logo logo-claro" href="{{ url_for('inicio') }}"><span class="logo-marca">O</span>Orienta</a>
+        <p>Herramienta de orientación para consejeros y tutores.<br>Proyecto 2 · Clustering con Machine Learning (RDA2).</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <a href="{{ url_for('evaluar') }}">Evaluar estudiante</a>
+        <a href="{{ url_for('inicio') }}#perfiles">Perfiles</a>
+        <a href="{{ url_for('tecnico') }}">Detalle técnico</a>
+      </div>
+      <div>
+        <h4>Aviso</h4>
+        <p>El resultado es una orientación para priorizar apoyo, no un diagnóstico. Los datos ingresados no se guardan.</p>
+      </div>
+    </div>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

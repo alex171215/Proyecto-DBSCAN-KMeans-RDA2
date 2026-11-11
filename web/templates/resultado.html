@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block titulo %}Resultado{% endblock %}
+{% block contenido %}
+<section class="resultado" style="--c: {{ seg.color }}; --s: {{ seg.suave }}">
+  <div class="contenedor contenedor-angosto">
+    <div class="res-top no-imprimir">
+      <a class="btn btn-texto" href="{{ url_for('evaluar') }}">← Evaluar otro estudiante</a>
+      <button class="btn btn-borde" onclick="window.print()">Descargar PDF</button>
+    </div>
+
+    <div class="tarjeta res-principal">
+      <div class="res-cab">
+        <div class="res-icono">{{ seg.icono }}</div>
+        <div>
+          <span class="etiqueta-seg">Perfil {{ seg.id }}{% if alias %} · {{ alias }}{% endif %}</span>
+          <h1>{{ seg.nombre }}</h1>
+          <p>{{ seg.resumen }}</p>
+        </div>
+      </div>
+
+      <div class="res-grid">
+        <div class="res-bloque res-derivar">
+          <h2>Derivar a</h2>
+          <ul>{% for d in seg.derivar %}<li>{{ d }}</li>{% endfor %}</ul>
+          <span class="chip chip-color">Prioridad {{ seg.prioridad|lower }}</span>
+        </div>
+        <div class="res-bloque">
+          <h2>Confianza del resultado</h2>
+          <div class="conf">
+            <div class="conf-barras">{% for i in range(3) %}<span class="{% if i >= barras %}off{% endif %}"></span>{% endfor %}</div>
+            <strong>{{ nivel }}</strong>
+          </div>
+          <p class="pequeno">{{ texto_conf }}</p>
+          <p class="pequeno gris">Respondiste {{ respondidas }} de 16 preguntas.{% if respondidas < 16 %} Completar las opcionales mejora la precisión.{% endif %}</p>
+        </div>
+      </div>
+
+      <div class="res-bloque">
+        <h2>Acciones sugeridas</h2>
+        <ol class="acciones">{% for a in seg.acciones %}<li>{{ a }}</li>{% endfor %}</ol>
+      </div>
+
+      {% if senales %}
+      <div class="res-bloque">
+        <h2>Lo que más se aleja de lo típico</h2>
+        <div class="senales">
+          {% for s in senales %}
+          <div class="senal">
+            <span class="senal-nombre">{{ s.nombre }}</span>
+            <strong>{{ s.valor }}</strong>
+            <span class="senal-tipico">{{ s.sentido }} que lo típico ({{ s.tipico }})</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <p class="nota">Este resultado es una orientación para priorizar el apoyo, no un diagnóstico. Confírmalo en la entrevista con el estudiante.</p>
+    </div>
+
+    <details class="tarjeta detalle no-imprimir">
+      <summary>Ver detalle técnico de este resultado</summary>
+      <div class="detalle-grid">
+        <div>
+          <h3>Ubicación entre los 800 estudiantes</h3>
+          <img src="data:image/png;base64,{{ mapa }}" alt="Mapa de los 4 grupos con la posición de este estudiante">
+          <p class="pequeno gris">Proyección PCA en 2D, sólo para visualizar. La asignación se calcula con las 16 variables.</p>
+        </div>
+        <div>
+          <h3>Comparación con su grupo</h3>
+          <table class="tabla">
+            <thead><tr><th>Variable</th><th>Estudiante</th><th>Su grupo</th><th>Típico</th></tr></thead>
+            <tbody>
+              {% for t in tabla %}<tr><td>{{ t.nombre }}</td><td>{{ t.estudiante }}</td><td>{{ t.grupo }}</td><td>{{ t.general }}</td></tr>{% endfor %}
+            </tbody>
+          </table>
+          <p class="pequeno gris">"—" = sin dato; se usó el valor típico. Modelo: K-Means (K = 4).</p>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+{% endblock %}

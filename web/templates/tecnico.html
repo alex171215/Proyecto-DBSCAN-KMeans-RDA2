@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block titulo %}Detalle técnico{% endblock %}
+{% block contenido %}
+<section class="evaluar">
+  <div class="contenedor">
+    <div class="cabecera cabecera-izq">
+      <span class="etiqueta">Detalle técnico</span>
+      <h1>Cómo se eligió el modelo</h1>
+      <p>Para docentes y evaluadores. Se compararon K-Means y DBSCAN con los 800 estudiantes del dataset (16 variables).</p>
+    </div>
+
+    <div class="tarjeta" style="overflow-x:auto">
+      <table class="tabla tabla-ancha">
+        <thead><tr><th>Modelo</th><th>Grupos</th><th>Silhouette</th><th>Ruido</th><th>Cobertura</th><th>Utilidad</th><th>Elegido</th></tr></thead>
+        <tbody>
+          {% for c in comparacion %}
+          <tr class="{% if c.seleccionado == 'si' %}fila-elegida{% endif %}">
+            <td><b>{{ 'K-Means (K = 4)' if c.model == 'kmeans' else 'DBSCAN (ε = 3.2, MinPts = 32)' }}</b></td>
+            <td>{{ c.n_clusters }}</td>
+            <td>{{ '%.4f'|format(c.silhouette) }}</td>
+            <td>{{ '%.0f'|format(c.noise_pct * 100) }} %</td>
+            <td>{{ '%.0f'|format(c.cobertura_estudiantes) }} %</td>
+            <td>{{ c.utilidad_negocio }}</td>
+            <td>{{ 'Sí' if c.seleccionado == 'si' else 'No' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2 tecnico-textos">
+      <div class="tarjeta">
+        <h3>Por qué K-Means</h3>
+        <p>DBSCAN tiene mejor Silhouette, pero deja al 88 % de los estudiantes como ruido. La regla del proyecto penaliza a un modelo que deja sin perfil a más del 20 %. K-Means asigna a todos a cuatro perfiles de tamaño parecido, cada uno con una acción concreta, y permite asignar estudiantes nuevos con <code>predict</code>.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Limitación</h3>
+        <p>El Silhouette de K-Means es 0.047: los grupos se solapan. Por eso la web muestra un nivel de confianza (distancia al centro más cercano frente al segundo) y presenta el perfil como orientación, no como diagnóstico.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <figure class="tarjeta figura"><img src="{{ url_for('figura', nombre='comparacion.png') }}" alt="Comparación de modelos"><figcaption>Comparación de métricas</figcaption></figure>
+      <figure class="tarjeta figura"><img src="{{ url_for('figura', nombre='pca_kmeans.png') }}" alt="Grupos de K-Means en PCA 2D"><figcaption>Los 4 grupos de K-Means en PCA 2D</figcaption></figure>
+    </div>
+  </div>
+</section>
+{% endblock %}

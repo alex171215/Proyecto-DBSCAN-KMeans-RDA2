@@ -1,0 +1,7 @@
+# Página web Orienta (Flask). Versiones probadas con Python 3.13
+flask==3.1.3
+scikit-learn==1.9.1
+pandas==3.0.5
+numpy==2.5.3
+joblib==1.6.0
+matplotlib==3.11.2

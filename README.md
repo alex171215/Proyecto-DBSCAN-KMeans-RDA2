@@ -54,7 +54,23 @@ Este script preprocesa `data/student_burnout_dropout_dataset_2_link 1.csv`, impu
 ├── app/
 │   ├── app.py                 # Aplicación Streamlit para inferencia y visualización 2D
 │   └── requirements.txt       # Dependencias exactas
+├── web/                       # Página pública "Orienta" para consejeros (Flask)
+│   ├── app.py                 # Rutas: inicio, evaluar, resultado, detalle técnico
+│   ├── templates/  static/    # HTML, CSS y JS
+│   └── requirements.txt
 └── informe/
     ├── informe.md             # Borrador del informe técnico (≤ 5 páginas)
     └── decision_modelo.md     # Justificación del modelo ganador
 ```
+
+## 🌐 Página web para consejeros (Orienta)
+
+Versión para el usuario final (tutor o consejero): 8 preguntas obligatorias, resultado con el servicio al que derivar, confianza y PDF. Usa el mismo `models/pipeline_kmeans.joblib`; no entrena nada.
+
+```bash
+pip install -r web/requirements.txt
+python web/app.py
+# abrir http://127.0.0.1:5000
+```
+
+La versión técnica en Streamlit sigue disponible con `python -m streamlit run app/app.py`.
