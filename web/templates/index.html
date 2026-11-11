@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+<section class="hero">
+  <div class="contenedor hero-in">
+    <div class="hero-texto">
+      <span class="etiqueta">Para consejeros y tutores</span>
+      <h1>Deriva a cada estudiante <span class="verde">al apoyo que necesita</span></h1>
+      <p>Responde 8 preguntas sobre el estudiante y Orienta te dice a qué perfil se parece, a qué servicio derivarlo y qué acciones tomar. Toma unos 2 minutos.</p>
+      <div class="hero-botones">
+        <a class="btn btn-primario" href="{{ url_for('evaluar') }}">Evaluar a un estudiante</a>
+        <a class="btn btn-texto" href="#como">Ver cómo funciona →</a>
+      </div>
+    </div>
+    <div class="hero-ilustracion" aria-hidden="true">
+      <div class="tarjeta-demo">
+        <div class="demo-cab"><span class="punto" style="background:#E5533D"></span>Resultado</div>
+        <div class="demo-titulo">Rezago y presión financiera</div>
+        <div class="demo-linea"><b>Derivar a:</b> Becas y ayuda económica</div>
+        <div class="demo-linea"><b>Derivar a:</b> Tutorías académicas</div>
+        <div class="demo-conf"><span></span><span></span><span class="off"></span> Confianza media</div>
+      </div>
+      <div class="burbuja b1">📚</div>
+      <div class="burbuja b2">🤝</div>
+      <div class="burbuja b3">📱</div>
+      <div class="burbuja b4">🎯</div>
+    </div>
+  </div>
+</section>
+
+<section class="cifras">
+  <div class="contenedor cifras-in">
+    <div><strong>800</strong><span>estudiantes analizados</span></div>
+    <div><strong>4</strong><span>perfiles de apoyo</span></div>
+    <div><strong>8</strong><span>preguntas obligatorias</span></div>
+    <div><strong>2 min</strong><span>por evaluación</span></div>
+  </div>
+</section>
+
+<section class="seccion" id="como">
+  <div class="contenedor">
+    <div class="cabecera">
+      <h2>Cómo funciona</h2>
+      <p>Tres pasos, sin cuentas ni instalaciones. Nada de lo que ingresas se guarda.</p>
+    </div>
+    <div class="grid-3">
+      <div class="tarjeta paso-card">
+        <div class="paso-num">1</div>
+        <h3>Responde las preguntas</h3>
+        <p>Datos académicos, hábitos y entorno del estudiante. 8 son obligatorias; el resto mejoran la precisión.</p>
+      </div>
+      <div class="tarjeta paso-card">
+        <div class="paso-num">2</div>
+        <h3>Recibe su perfil</h3>
+        <p>El modelo compara al estudiante con 800 casos y lo ubica en el grupo más parecido, con su nivel de confianza.</p>
+      </div>
+      <div class="tarjeta paso-card">
+        <div class="paso-num">3</div>
+        <h3>Deriva y da seguimiento</h3>
+        <p>Obtienes el servicio al que derivarlo y acciones concretas. Puedes guardar el resultado en PDF.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion seccion-gris" id="perfiles">
+  <div class="contenedor">
+    <div class="cabecera">
+      <h2>Los 4 perfiles de estudiantes</h2>
+      <p>Cada perfil tiene un servicio de apoyo asignado.</p>
+    </div>
+    <div class="grid-4">
+      {% for s in segmentos.values() %}
+      <div class="tarjeta perfil" style="--c: {{ s.color }}; --s: {{ s.suave }}">
+        <div class="perfil-icono">{{ s.icono }}</div>
+        <h3>{{ s.nombre }}</h3>
+        <p>{{ s.resumen }}</p>
+        <div class="perfil-derivar">
+          <span>Derivar a</span>
+          {% for d in s.derivar %}<b>{{ d }}</b>{% endfor %}
+        </div>
+        <div class="perfil-pie">
+          <span class="chip">Prioridad {{ s.prioridad|lower }}</span>
+          <span class="perfil-n">{{ s.pct }} % de los estudiantes</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="contenedor aviso">
+    <div>
+      <h2>Una orientación, no un diagnóstico</h2>
+      <p>Los perfiles son tendencias que ayudan a decidir por dónde empezar. Los grupos se parecen entre sí, así que cada resultado debe confirmarse en la entrevista con el estudiante.</p>
+    </div>
+    <a class="btn btn-primario" href="{{ url_for('evaluar') }}">Empezar evaluación</a>
+  </div>
+</section>
+{% endblock %}

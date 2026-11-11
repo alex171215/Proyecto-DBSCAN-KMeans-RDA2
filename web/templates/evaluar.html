@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block titulo %}Evaluar estudiante{% endblock %}
+
+{% macro campo(f) %}
+  {% set p = preguntas[f] %}
+  {% set falta = f in faltan %}
+  <div class="campo {% if falta %}campo-error{% endif %}">
+    <label for="{{ f }}">{{ p[0] }}{% if p[4] %} <span class="req">*</span>{% endif %}</label>
+    {% if p[1] == 'numero' %}
+      <div class="entrada">
+        <input type="number" id="{{ f }}" name="{{ f }}" inputmode="decimal"
+               min="{{ minimo[f] }}" max="{{ maximo[f] }}" step="any"
+               value="{{ previo.get(f, '') }}" placeholder="Típico: {{ '%g'|format(mediana[f]) }}"
+               {% if p[4] %}required{% endif %}>
+        <span class="unidad">{{ p[2] }}</span>
+      </div>
+    {% else %}
+      {% set v = previo.get(f) or ('%g'|format(mediana[f]) if p[4] else '5') %}
+      <div class="escala" data-escala>
+        <div class="escala-fila">
+          <span class="escala-ext">{{ p[5] }}</span>
+          <input type="range" id="{{ f }}" name="{{ f }}" min="0" max="10" step="{{ p[3] }}" value="{{ v }}"
+                 {% if not p[4] and not previo.get(f) %}disabled{% endif %}>
+          <span class="escala-ext">{{ p[6] }}</span>
+          <output class="escala-valor">{{ v }}</output>
+        </div>
+        {% if not p[4] %}
+        <label class="sin-dato"><input type="checkbox" data-sin-dato {% if not previo.get(f) %}checked{% endif %}> Sin dato</label>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if falta %}<small class="msg-error">Falta este dato.</small>{% endif %}
+  </div>
+{% endmacro %}
+
+{% block contenido %}
+<section class="evaluar">
+  <div class="contenedor contenedor-angosto">
+    <div class="cabecera cabecera-izq">
+      <span class="etiqueta">Evaluación</span>
+      <h1>Evaluar a un estudiante</h1>
+      <p>Los campos con <span class="req">*</span> son obligatorios. Si no conoces un dato opcional, déjalo vacío: se usará el valor típico.</p>
+    </div>
+
+    <ol class="pasos" data-pasos>
+      {% for titulo, _, _ in pasos %}
+      <li class="{% if loop.first %}activo{% endif %}"><span>{{ loop.index }}</span>{{ titulo }}</li>
+      {% endfor %}
+    </ol>
+
+    {% if faltan %}
+    <div class="alerta">Faltan {{ faltan|length }} dato(s) obligatorio(s). Están marcados en rojo.</div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('evaluar') }}" class="tarjeta formulario" novalidate data-form>
+      <div class="campo campo-alias">
+        <label for="alias">Nombre o código del estudiante <span class="opc">(opcional, sólo aparece en tu PDF)</span></label>
+        <div class="entrada"><input type="text" id="alias" name="alias" maxlength="60" value="{{ previo.get('alias', '') }}" placeholder="Ej.: Estudiante 2024-118"></div>
+      </div>
+
+      {% for titulo, descripcion, campos in pasos %}
+      <fieldset class="paso" data-paso="{{ loop.index0 }}">
+        <legend>{{ loop.index }}. {{ titulo }}</legend>
+        <p class="paso-desc">{{ descripcion }}</p>
+        <div class="campos">
+          {% for f in campos if preguntas[f][4] %}{{ campo(f) }}{% endfor %}
+        </div>
+        <details class="opcionales" {% if previo %}open{% endif %}>
+          <summary>Más datos (opcional) · mejoran la precisión</summary>
+          <div class="campos">
+            {% for f in campos if not preguntas[f][4] %}{{ campo(f) }}{% endfor %}
+          </div>
+        </details>
+        <div class="paso-botones">
+          {% if not loop.first %}<button type="button" class="btn btn-borde" data-atras>← Atrás</button>{% else %}<span></span>{% endif %}
+          {% if not loop.last %}
+            <button type="button" class="btn btn-primario" data-siguiente>Siguiente →</button>
+          {% else %}
+            <button type="submit" class="btn btn-primario">Ver resultado</button>
+          {% endif %}
+        </div>
+      </fieldset>
+      {% endfor %}
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/evaluar.js') }}"></script>
+{% endblock %}
