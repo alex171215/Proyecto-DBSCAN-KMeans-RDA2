@@ -67,8 +67,8 @@ def cargar_modelos():
 
 @st.cache_data
 def cargar_datos():
-    features = json.loads((ROOT / "data" / "feature_names.json").read_text())
-    segmentos = json.loads((ROOT / "segments" / "segments_kmeans.json").read_text())
+    features = json.loads((ROOT / "data" / "feature_names.json").read_text(encoding="utf-8"))
+    segmentos = json.loads((ROOT / "segments" / "segments_kmeans.json").read_text(encoding="utf-8"))
     pca_2d = pd.read_csv(ROOT / "data" / "pca_2d.csv")
     labels = pd.read_csv(ROOT / "segments" / "labels_kmeans.csv")["cluster"]
     perfiles = pd.read_csv(ROOT / "segments" / "perfiles_kmeans.csv")
