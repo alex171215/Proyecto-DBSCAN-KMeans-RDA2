@@ -1,8 +1,9 @@
-# Dependencias del entorno de la aplicación web y modelado
-# Persona 3: Registrar aquí las versiones exactas instaladas en el entorno local
-streamlit
-scikit-learn
-pandas
-numpy
-joblib
-matplotlib
+# Versiones exactas con las que se ejecutaron notebooks/03_final.ipynb y app/app.py (Python 3.13)
+streamlit==1.67.0
+scikit-learn==1.9.1
+pandas==3.0.5
+numpy==2.5.3
+joblib==1.6.0
+matplotlib==3.11.2
+# Sólo para los notebooks (02_dbscan.ipynb usa seaborn); la app no lo necesita
+seaborn==0.13.2
