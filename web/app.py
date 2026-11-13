@@ -17,6 +17,7 @@ import base64
 import io
 import json
 import math
+import os
 from pathlib import Path
 
 import joblib
@@ -276,4 +277,5 @@ def no_encontrado(_):
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    # Local: http://127.0.0.1:5000 · En Render el puerto llega en la variable PORT
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=False)
