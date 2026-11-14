@@ -1,0 +1,2 @@
+model,n_clusters,silhouette,noise_pct,inertia,eps,min_samples
+kmeans,4,0.04745344526353803,0.0,11290.70445591932,,

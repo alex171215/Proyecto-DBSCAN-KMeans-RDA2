@@ -58,10 +58,10 @@
 
 ### 10. ¿Cuáles son los 4 segmentos encontrados y qué acciones concretas se recomiendan?
 > **Respuesta:**  
-> 1. **Cluster 0 — Rezago y Presión Financiera (171 est., 21.4%):** Mayor número de materias reprobadas (1.79 backlogs) y alto estrés financiero (5.65). $\rightarrow$ *Acción:* Becas de auxilio económico y tutorías intensivas de nivelación.
-> 2. **Cluster 1 — Participación y Apoyo Familiar (220 est., 27.5%):** Máximo soporte familiar (7.09) y buen promedio. $\rightarrow$ *Acción:* Inclusión en programas de mentoría par y embajadores universitarios.
-> 3. **Cluster 2 — Alto Rendimiento y Sobreexigencia (206 est., 25.8%):** Promedio más alto (7.23 GPA) pero menor tiempo de sueño (5.97 h) y estrés elevado. $\rightarrow$ *Acción:* Reconocimiento de excelencia académica y talleres de descanso y prevención de burnout.
-> 4. **Cluster 3 — Bajo Compromiso y Riesgo Silencioso (203 est., 25.4%):** Menor asistencia (73%) y alto tiempo en pantalla (5.63 h). $\rightarrow$ *Acción:* Alertas tempranas de inasistencia y entrevistas vocacionales personalizadas.
+> 1. **Cluster 0 — Rezago y Presión Financiera (171 est., 21.4%):** Mayor número de materias reprobadas (1.79 backlogs), alto estrés financiero (5.65) y baja motivación (4.45), aunque mantienen asistencia (85.3%). $\rightarrow$ *Acción:* Becas de auxilio económico, tutorías intensivas de nivelación y plan de recuperación académica.
+> 2. **Cluster 1 — Participación y Apoyo Familiar (220 est., 27.5%):** Máximo soporte familiar (7.33), alta motivación (6.06), actividad social (5.98) y ejercicio (2.72). $\rightarrow$ *Acción:* Mantener el acompañamiento y convocarlos como mentores pares para estudiantes vulnerables.
+> 3. **Cluster 2 — Baja Asistencia y Alta Pantalla (206 est., 25.8%):** Semestres más avanzados (año 3.04), asistencia más baja (69.1%) y el mayor tiempo en pantalla (6.72 h/día). $\rightarrow$ *Acción:* Alertas tempranas de inasistencia, talleres sobre gestión del tiempo y uso responsable de pantallas.
+> 4. **Cluster 3 — Buen GPA con Seguimiento de Bienestar (203 est., 25.4%):** Estudiantes de primeros ciclos (año 1.66) con el GPA previo más alto (7.64), pero con el menor tiempo de sueño (5.62 h) y alto estrés financiero (5.93). $\rightarrow$ *Acción:* Reconocimiento académico, becas de manutención y apoyo psicológico preventivo para evitar el colapso por sobreexigencia.
 
 ---
 
@@ -69,24 +69,20 @@
 
 Para la sustentación en vivo frente al docente, ingresen los siguientes dos perfiles en el formulario de la aplicación web (`streamlit run app.py`):
 
-### Registro 1: Estudiante en Riesgo Académico y Financiero $\rightarrow$ Asigna a Cluster 0
-- **Año de Estudio:** 3
-- **Asistencia:** 65.0 %
-- **Horas de Estudio al Día:** 2.0 h
-- **Promedio Anterior (GPA):** 5.5
-- **Materias Pendientes (Backlogs):** 3
-- **Estrés Financiero:** 9.0 / 10
-- **Nivel de Estrés:** 8.5 / 10
-- **Apoyo Familiar:** 4.0 / 10
-- *Resultado visual:* Cae en **Cluster 0 (Rezago y presión financiera)**. La app resalta el punto en el mapa PCA 2D y recomienda: *"Becas o ayuda económica, tutorías para materias pendientes y plan de recuperación académica"*.
-
-### Registro 2: Estudiante de Alto Rendimiento $\rightarrow$ Asigna a Cluster 2
+### Registro 1: Estudiante en Riesgo por Rezago y Presión Financiera $\rightarrow$ Asigna a Cluster 0
 - **Año de Estudio:** 2
-- **Asistencia:** 92.0 %
-- **Horas de Estudio al Día:** 5.0 h
-- **Promedio Anterior (GPA):** 8.7
-- **Materias Pendientes (Backlogs):** 0
-- **Horas de Sueño:** 5.5 h
-- **Motivación:** 8.5 / 10
-- **Apoyo Familiar:** 8.0 / 10
-- *Resultado visual:* Cae en **Cluster 2 (Alto rendimiento y sobreexigencia)**. La app resalta el punto y recomienda: *"Reconocimiento al mérito académico y talleres de manejo del estrés para prevenir sobreexigencia"*.
+- **Materias Pendientes (Backlogs):** 3 materias
+- **Estrés Financiero:** 8.0 puntaje
+- **Nivel de Estrés:** 8.5 puntaje
+- **Motivación:** 3.0 puntaje
+- **Asistencia:** 85.0 %
+- *Resultado en la App:* Asigna **Segmento 0: Rezago y presión financiera**. La app resalta el punto en el mapa PCA 2D y recomienda: *"Becas o ayuda económica, tutorías para materias pendientes y plan de recuperación académica"*.
+
+### Registro 2: Estudiante con Desconexión y Alta Pantalla $\rightarrow$ Asigna a Cluster 2
+- **Año de Estudio:** 3
+- **Asistencia:** 60.0 %
+- **Tiempo de Pantalla:** 8.0 h/día
+- **Materias Pendientes (Backlogs):** 1 materia
+- **Apoyo Familiar:** 4.5 puntaje
+- *Resultado en la App:* Asigna **Segmento 2: Baja asistencia y alta pantalla**. La app resalta la estrella en el cuadrante de pantalla alta y recomienda: *"Alertas tempranas de asistencia y talleres sobre uso de pantallas y hábitos de sueño"*.
+

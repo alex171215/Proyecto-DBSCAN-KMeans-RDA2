@@ -114,3 +114,4 @@ streamlit run app.py
   - Reparto cronometrado de los 5 a 10 minutos de sustentación para los 3 integrantes.
   - Las 10 preguntas más difíciles y trampas que suele hacer el docente y la respuesta exacta para responder con seguridad.
   - Los datos exactos de los 2 registros de prueba para la demo en vivo frente al evaluador (un estudiante en riesgo financiero que cae en Cluster 0 y un estudiante de alto rendimiento que cae en Cluster 2).
+
